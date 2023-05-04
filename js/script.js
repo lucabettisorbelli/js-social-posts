@@ -55,3 +55,23 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+
+
+let contenitore = document.createElement("div");
+
+
+function arrayPost(arrayPosts) {
+    console.log(arrayPosts);
+}
+
+arrayPost(posts);
+
+
+posts.forEach(elementoPosts => {
+    
+    const {id, content, media, author, likes, created} = elementoPosts;
+
+    console.log(id, content, media, author, likes, created)
+});
+
