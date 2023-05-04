@@ -57,21 +57,31 @@ const posts = [
 ];
 
 
-
-let contenitore = document.createElement("div");
-
-
 function arrayPost(arrayPosts) {
     console.log(arrayPosts);
 }
 
 arrayPost(posts);
 
+let container = document.getElementById("container");
 
 posts.forEach(elementoPosts => {
     
     const {id, content, media, author, likes, created} = elementoPosts;
+    
+    console.log(id, content, media, author, likes, created);
 
-    console.log(id, content, media, author, likes, created)
+    let postElement = document.createElement("div");
+
+    postElement.innerHTML =
+    `<p>ID: ${id}</p>
+    <p>Content: ${content}</p>
+    <p>Media: ${media}</p>
+    <p>Author: ${author}</p>
+    <p>Likes: ${likes}</p>
+    <p>Created: ${created}</p>`
+
+    container.appendChild(postElement);
 });
+
 
