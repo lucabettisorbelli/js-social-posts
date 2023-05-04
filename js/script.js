@@ -64,13 +64,14 @@ function arrayPost(arrayPosts) {
 arrayPost(posts);
 
 let container = document.getElementById("container");
+let postContain = document.querySelector(".post");
 
 posts.forEach(elementoPosts => {
     
     const {id, content, media, author, likes, created} = elementoPosts;
     
     console.log(id, content, media, author, likes, created);
-
+    
     let postElement = document.createElement("div");
 
     let authorImage = "";
@@ -79,15 +80,26 @@ posts.forEach(elementoPosts => {
     }
 
     postElement.innerHTML =
-    `<p>ID: ${id}</p>
-    <p>Content: ${content}</p>
-    <img src="${media}" 
-    <p>Author: ${author.name}</p>
-    ${authorImage}
-    <p>Likes: ${likes}</p>
-    <p>Created: ${created}</p>`
+    `<img class="profile-pic" src="${media}" 
+    <div class="post-meta__author">${author.name}</div>
+    <p>${created}</p>
+    <div class="post__text">${content}</div>
+    <div class="post__image">${authorImage}</div>
+    <div class="bottone">
+    <button id="btn"> Mi piace </button>
+    <div>Piace a ${likes} persone</div>
+    </div>`
 
-    container.appendChild(postElement);
+    postContain.appendChild(postElement);
+
 });
+
+let pulzanteLike = document.querySelectorAll(".bottone")
+pulzanteLike.forEach(function(bottone) {
+    bottone.addEventListener("click", function () {
+        console.log("ciao");
+    });
+});
+
 
 
