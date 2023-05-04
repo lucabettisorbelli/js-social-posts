@@ -73,11 +73,17 @@ posts.forEach(elementoPosts => {
 
     let postElement = document.createElement("div");
 
+    let authorImage = "";
+    if (author.image) {
+        authorImage = `<img src="${author.image}"`
+    }
+
     postElement.innerHTML =
     `<p>ID: ${id}</p>
     <p>Content: ${content}</p>
-    <p>Media: ${media}</p>
-    <p>Author: ${author}</p>
+    <img src="${media}" 
+    <p>Author: ${author.name}</p>
+    ${authorImage}
     <p>Likes: ${likes}</p>
     <p>Created: ${created}</p>`
 
