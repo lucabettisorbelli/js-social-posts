@@ -76,30 +76,74 @@ posts.forEach(elementoPosts => {
 
     let authorImage = "";
     if (author.image) {
-        authorImage = `<img src="${author.image}"`
+        authorImage = `<img class="profile-pic" src="${author.image}"`
     }
 
     postElement.innerHTML =
-    `<img class="profile-pic" src="${media}" 
-    <div class="post-meta__author">${author.name}</div>
-    <p>${created}</p>
-    <div class="post__text">${content}</div>
-    <div class="post__image">${authorImage}</div>
-    <div class="bottone">
-    <button id="btn"> Mi piace </button>
-    <div>Piace a ${likes} persone</div>
-    </div>`
+    `<div class="post">
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    ${ authorImage }
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${ author.name }</div>
+                    <div class="post-meta__time">${ created }</div>
+                </div>                    
+            </div>
+        </div>
+        <div class="post__text">${ content }</div>
+        <div class="post__image">
+            <img src="${ media }" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button js-like-button" href="#" data-postid="${ id }">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-${ id }" class="js-likes-counter">${ likes }</b> persone
+                </div>
+            </div> 
+        </div>            
+    </div>`;
 
     postContain.appendChild(postElement);
+})
 
-});
+    const likesContainer = document.getElementsByClassName("js-likes");
 
-let pulzanteLike = document.querySelectorAll(".bottone")
-pulzanteLike.forEach(function(bottone) {
-    bottone.addEventListener("click", function () {
-        console.log("ciao");
-    });
-});
+    for (let i = 0; i < likesContainer.length; i++) {
+        const currentContainer = likesContainer[i];
+        const btn = currentContainer.querySelector(".like-button");
+        const likes = currentContainer.querySelector(".js-likes-counter");
+        const clickedClass = "like-button--liked";
+    
+        btn.addEventListener("click", function(e) {
+            e.preventDefault();
+    
+            //Se l'elemento NON ha già la classe "clicked"
+            if( !btn.classList.contains(clickedClass) ) {
+                //aggiungo la classe
+                btn.classList.add(clickedClass);
+                //recupero e incremento i likes
+                let likeNumber = parseInt( likes.innerText );
+                likeNumber++;
+                //scrivo il valore aggiornato
+                likes.innerText = likeNumber;
+            } else {
+                //aggiungo la classe
+                btn.classList.remove(clickedClass);
+                //recupero e incremento i likes
+                let likeNumber = parseInt( likes.innerText );
+                likeNumber--;
+                //scrivo il valore aggiornato
+                likes.innerText = likeNumber;
+            }
 
-
-
+    
+})
+    }
